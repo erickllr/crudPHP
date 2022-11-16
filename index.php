@@ -13,9 +13,10 @@
 // Carga el fichero autoload.php
 require_once 'config/Parameters.php';
 require_once 'vendor/autoload.php';
+include 'controllers/AuthControllers.php';
 include 'controllers/UsersController.php';
-include 'controllers/AuthController.php';
 include 'controllers/IndexController.php';
+include 'controllers/ErrorController.php';
 
 session_start();
 
@@ -47,6 +48,7 @@ $twig = new \Twig\Environment($loader);
 /**
  * Tengo que comprobar si $controller tiene algo
  */
+
 if (isset($_GET['controller'])) {
   $controller = ucfirst($_GET['controller']) . 'Controller'; // UsersController
 
@@ -73,6 +75,7 @@ if (isset($_GET['controller'])) {
      * ¿Codigo de error?
      * ¿Vista de error?
      */
+    ErrorController::_404();
   }
 } else {
   /**
@@ -82,7 +85,9 @@ if (isset($_GET['controller'])) {
   // $usersController->index();
 
   //Mi accion por defecto el lanzar mi index.twig como página de caida
+  //echo $twig->render('./templates/index.twig');
   echo $twig->render('index.twig');
+
   /**
    * Si no existe el parametro controller en la URL tengo que hacer algo.
    * Enviar un error

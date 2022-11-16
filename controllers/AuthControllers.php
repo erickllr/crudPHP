@@ -6,7 +6,7 @@ class AuthController
    */
   public function login()
   {
-    echo $GLOBALS['twig']->render('auth/login.twig', ['URL => URL']);
+    echo $GLOBALS['twig']->render('auth/login.twig', ['URL' => URL]);
   }
   /**
    * Función que redigire a la vista del home
